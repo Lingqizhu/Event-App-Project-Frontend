@@ -63,4 +63,8 @@ export class ApiClient {
   updateEve(id, name, location, information, date) {
     return this.authenticatedCall("put", `${url}${id}`, { name, location, information, date });
   }
+
+  /* searchLocation(location){
+    return this.authenticatedCall("get",`${url}location/${location}`)
+  } */
 }

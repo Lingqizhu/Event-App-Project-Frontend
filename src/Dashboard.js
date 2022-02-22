@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Add from "./Add";
+import "./Dashboard.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
+
+//import searchBar from "./searchBar.js"
 
 function Dashboard(props) {
   const [events, cEvents] = useState([]);
   const [current, cCurrent] = useState(undefined);
   const [location, cLocation] = useState(undefined);
-
 
   const refreshList = () => {
     props.client.getEvents().then((response) => cEvents(response.data));
@@ -14,9 +21,10 @@ function Dashboard(props) {
   const removeEvent = (id) => {
     props.client.removeEve(id).then(() => refreshList());
   };
-
-
-//how it works?
+  /* const searchBar=()=>{
+   props.client.searchLocation(location).then(()=>)
+ } */
+  //how it works?
   const updateEvent = (ad) => {
     cCurrent(ad);
   };
@@ -28,35 +36,79 @@ function Dashboard(props) {
   const buildrows = () => {
     return events.map((current) => {
       return (
+       <>
         <tr key={current._id}>
-          <td>{current.name}</td>
-          <td>{current.location}</td>
-          <td>{current.information}</td>
-          <td>{current.date}</td>
-          <td>
-            <button onClick={() => removeEvent(current._id)}> remove</button>
-            <button onClick={() => updateEvent(current)}> update</button>
-          </td>
-        </tr>
+           <td>{current.name}</td>
+           <td>{current.location}</td>
+           <td>{current.information}</td>
+           <td>{current.date}</td>
+           <td>
+     <button
+       className="remove"
+       onClick={() => removeEvent(current._id)}
+     >
+       {" "}
+       remove
+     </button>
+     <button className="update" onClick={() => updateEvent(current)}>
+       {" "}
+       update
+     </button>
+   </td>
+       </tr>
+
+       </>
+
       );
     });
   };
 
   return (
-    <>
-      Dashboard
+    <div className="dashboard">
+      <div>
+        <Navbar bg="light" variant="warning">
+          <Container>
+            <Navbar.Brand href="#home">
+              <img
+                alt=""
+                src="https://learning.thedeveloperacademy.com/pluginfile.php/1/theme_moove/logo/1624462331/TheDevAcademy%20Logo%20NB.png"
+                width="50"
+                height="50"
+                className="d-inline-block align-top"
+              />{" "}
+              Events APP
+              <nav className="navbar">
+                <Button
+                  className="justify-content-end"
+                  onClick={() => props.logOut()}
+                >
+                  Logout
+                </Button>
+              </nav>
+            </Navbar.Brand>
+          </Container>
+        </Navbar>
+      </div>
       <br />
-      <table>
+      <searchBar placeholder="search by location" />
+      {/* <button onClick={()=>props.logOut()}>Logout</button> */}
+      {/* <form >
+        <label>Search Location</label>
+        <input type="text" name="location" value={location}/>
+        <button onClick={()=>searchBar(location)}></button>
+      </form> */}
+      <Table>
         <thead>
-          <tr>
+          <tr >
             <th>Event Name</th>
             <th>Location</th>
             <th>Information</th>
             <th>Date</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>{buildrows()}</tbody>
-      </table>
+      </Table>
       <br />
       <br />
       <Add
@@ -67,7 +119,7 @@ function Dashboard(props) {
         }}
         currentEvent={current}
       />
-    </>
+    </div>
   );
 }
 

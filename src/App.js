@@ -15,6 +15,11 @@ function App() {
     changeToken(newToken);
   }
 
+  const logOut=()=>{
+    localStorage.removeItem("token")
+    changeToken();
+  }
+
   const client = new ApiClient(
     token,
     logout
@@ -23,7 +28,7 @@ function App() {
   return (
     <>
       {token ? (
-        <Dashboard client={client} />
+        <Dashboard client={client} logOut={()=>logOut()}/>
       ) : (
         <Login client={client} loggedIn={loggedIn} />
       )}

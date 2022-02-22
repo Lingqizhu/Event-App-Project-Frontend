@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./add.css"
 
 function Add(props) {
   const [disabled, cDisabled] = useState(false);
@@ -77,7 +78,7 @@ function Add(props) {
         />
         <br />
         <br />
-        <button type="submit" disabled={disabled}>
+        <button className ="add" type="submit" disabled={disabled}>
           {" "}
           Submit{" "}
         </button>
