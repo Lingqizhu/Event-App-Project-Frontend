@@ -64,6 +64,14 @@ export class ApiClient {
     return this.authenticatedCall("put", `${url}${id}`, { name, location, information, date });
   }
 
+  getByLocation(location) {
+    return this.authenticatedCall("get", `${url}${location}`) ;
+  }
+
+  getByName(name) {
+    return this.authenticatedCall("get", `${url}name/${name}`) ;
+  }
+
   /* searchLocation(location){
     return this.authenticatedCall("get",`${url}location/${location}`)
   } */

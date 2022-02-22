@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Add from "./Add";
 import "./Dashboard.css";
+import SearchBar from  "./searchBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
@@ -13,6 +14,8 @@ function Dashboard(props) {
   const [events, cEvents] = useState([]);
   const [current, cCurrent] = useState(undefined);
   const [location, cLocation] = useState(undefined);
+  const [name, cName] = useState(undefined);
+  const [sort, cSort] = useState('unsorted');
 
   const refreshList = () => {
     props.client.getEvents().then((response) => cEvents(response.data));
@@ -21,6 +24,16 @@ function Dashboard(props) {
   const removeEvent = (id) => {
     props.client.removeEve(id).then(() => refreshList());
   };
+
+  const getByLocation = (loc) => {
+    props.client.getByLocation(loc).then((response) => cEvents(response.data));
+  };
+
+  const getByName = (nam) => {
+    props.client.getByName(nam).then((response) => cEvents(response.data));
+  };
+
+
   /* const searchBar=()=>{
    props.client.searchLocation(location).then(()=>)
  } */
@@ -85,6 +98,17 @@ function Dashboard(props) {
                   Logout
                 </Button>
               </nav>
+
+              <SearchBar 
+              refreshList={() => {
+                refreshList();
+                cCurrent(undefined);
+              }}
+              cName = {cName}
+              cLocation = {cLocation}
+              getByLocation = {(loc) => getByLocation(loc)}
+              getByName = {(nam) => getByName(nam)}
+            />
             </Navbar.Brand>
           </Container>
         </Navbar>
