@@ -3,8 +3,11 @@ import Dashboard from "./Dashboard";
 import { ApiClient } from "./apiClient";
 import { useState} from 'react'
 import Login from "./login";
+import Register from "./Register";
+
 function App() {
   const [token,changeToken] = useState(window.localStorage.getItem("token"))
+
   const logout = () => {
     window.localStorage.removeItem("token")
     changeToken("")
@@ -14,6 +17,11 @@ function App() {
     window.localStorage.setItem("token",newToken)
     changeToken(newToken);
   }
+
+  /* const register=(newToken)=>{
+    window.localStorage.setItem("token",newToken)
+    changeToken(newToken);
+  } */
 
   const logOut=()=>{
     localStorage.removeItem("token")

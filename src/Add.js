@@ -36,6 +36,21 @@ function Add(props) {
       });
   };
 
+   // cancel event update
+ const cancelUpdate = () => {
+  props.cCurrentEvent(undefined)
+  document.getElementById('addForm').reset()
+ }
+
+ // show cancel button
+ const showCancelButton = () => {
+   return (
+      <button className = 'button-28' type = 'button' onClick={() => cancelUpdate()}>
+        {' '}
+        Cancel Update{' '}
+      </button>)
+ }
+
   return (
     <div className="newtitle">
 
@@ -43,39 +58,41 @@ function Add(props) {
       <br />
 
       <form onSubmit={(e) => submitHandler(e)} id="addForm" className="addtitles">
-        Name: <br />
+
         <input
           type="text"
           defaultValue={props.currentEvent?.name}
           name="adName"
           disabled={disabled}
+          id="addinput"
+          placeholder="name"
         />
-        <br />
-        Location:
-        <br />
+
         <input
           type="text"
           defaultValue={props.currentEvent?.location}
           name="location"
           disabled={disabled}
+          id="addinput"
+          placeholder="location"
         />
-        <br />
-        Information:
-        <br />
+
         <input
           type="text"
           defaultValue={props.currentEvent?.information}
           name="information"
           disabled={disabled}
+          id="addinput"
+          placeholder="information"
         />
-        <br />
-        Date:
-        <br />
+
         <input
           type="date"
           defaultValue={props.currentEvent?.date}
           name="date"
           disabled={disabled}
+          id="addinput"
+          placeholder="date"
         />
         <br />
         <br />
@@ -84,6 +101,7 @@ function Add(props) {
           Submit{" "}
         </button>
       </form>
+      {props.currentEvent ? showCancelButton() : null}
     </div>
   );
 }

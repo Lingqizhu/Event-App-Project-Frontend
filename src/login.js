@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { BrowserRouter, Route, Link } from 'react-router-dom'
 import "./login.css";
 
 function Login(props) {
+
   const [disabled, cDisabled] = useState(false);
 
   const submitHandler = (e) => {
@@ -10,45 +12,38 @@ function Login(props) {
     e.preventDefault();
     cDisabled(true);
     props.client
-      .login(e.target.username.value, e.target.password.value)
-      .then((response) => {
+      .login(e.target.username.value,e.target.password.value)
+      .then( (response) => {
         cDisabled(false);
         props.loggedIn(response.data.token);
       })
-      .catch((err) => {
+      .catch( (err) => {
         alert("an error has occurred");
         console.log(err);
         cDisabled(false);
-      });
+      })
   };
 
   return (
     <div className="loginbackground">
-      <div className="login">
-        Login
+      <form  className="login" onSubmit={(e) => submitHandler(e)}>
+        Event App
+        <input type="text" name="username" placeholder="username" id="loginput" disabled={disabled} />
         <br />
-        <form onSubmit={(e) => submitHandler(e)}>
-          <input
-            type="text"
-            name="username"
-            disabled={disabled}
-            placeholder="username"
-          />
-          <br />
-          <input
-            type="password"
-            name="password"
-            disabled={disabled}
-            placeholder="password"
-          />
-          <br />
-          <br />
-          <button type="submit" disabled={disabled} className="submit">
-            {" "}
-            Submit{" "}
-          </button>
-        </form>
-      </div>
+        <br />
+        <input type="password" name="password" placeholder="password" id="loginput" disabled={disabled} />
+        <br />
+        <br />
+        <button type="submit"  className="summit" disabled={disabled}>
+          {" "}
+          Login{" "}
+        </button>
+     {/*    <Link href="/register">Register</Link> */}
+        <button type="register" className="summit">
+          {" "}
+          Register{" "}
+        </button>
+      </form>
     </div>
   );
 }

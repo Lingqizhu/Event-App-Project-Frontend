@@ -1,0 +1,27 @@
+input{
+    border-radius: 5Px;
+    margin:5px;
+    padding: 5px;
+}
+
+.button{
+    background:  #BCFD4C;
+    color: black;
+    font-size: 20px;
+    font-weight: 20;
+    padding: 5px 15px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+.showall-button{
+    background: #6E6E6E;
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 20;
+    padding: 5px 15px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+.showallbutton{
+    text-align: center;
+}

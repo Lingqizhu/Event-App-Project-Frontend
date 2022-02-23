@@ -10,7 +10,6 @@ export class ApiClient {
 
   apiCall(method, url, data) {
     console.log(url)
-
     return axios({
       method,
       url,
@@ -46,6 +45,17 @@ export class ApiClient {
       userName: username,
       password: password
     })
+  }
+
+  register(username,password){
+    return this.apiCall("post",`${url}register`,{
+      userName: username,
+      password: password
+    })
+  }
+
+  getUserlist(){
+    return this.apiCall("get", `${url}userlist`);
   }
 
   getEvents() {

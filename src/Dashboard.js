@@ -84,16 +84,7 @@ function Dashboard(props) {
               />{" "}
              Events APP
             </Navbar.Brand>
-            <SearchBar
-              refreshList={() => {
-                refreshList();
-                cCurrent(undefined);
-              }}
-              cName = {cName}
-              cLocation = {cLocation}
-              getByLocation = {(loc) => getByLocation(loc)}
-              getByName = {(nam) => getByName(nam)}
-            />
+
               {/* <FormControl
                 type="search"
                 placeholder="Search by location"
@@ -106,6 +97,32 @@ function Dashboard(props) {
           </Container>
         </Navbar>
       </div>
+      <br />
+      <SearchBar
+              refreshList={() => {
+                refreshList();
+                cCurrent(undefined);
+              }}
+              cName = {cName}
+              cLocation = {cLocation}
+              getByLocation = {(loc) => getByLocation(loc)}
+              getByName = {(nam) => getByName(nam)}
+            />
+
+      <Table className="table">
+        <thead>
+          <tr>
+            <th>Event Name</th>
+            <th>Location</th>
+            <th>Information</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>{buildrows()}</tbody>
+
+      </Table>
       <br />
       <Add
         client={props.client}
@@ -120,20 +137,6 @@ function Dashboard(props) {
         getByLocation={(loc) => getByLocation(loc)}
         getByName={(nam) => getByName(nam)}
       />
-
-      <Table className="table">
-        <thead>
-          <tr>
-            <th>Event Name</th>
-            <th>Location</th>
-            <th>Information</th>
-            <th>Date</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>{buildrows()}</tbody>
-      </Table>
-      <br />
     </div>
   );
 }

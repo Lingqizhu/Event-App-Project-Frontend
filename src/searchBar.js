@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import Col from "react-bootstrap/Row";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Dropdown from "react-bootstrap/Dropdown";
-//import "./add.css"
+import Container from 'react-bootstrap/Container';
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import "./searchBar.css";
+
 function Searchbar(props) {
   const resetName = () => {
     props.cName(undefined);
@@ -37,53 +39,49 @@ function Searchbar(props) {
 
   return (
     <>
-     {/*  <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-          Search
-        </Dropdown.Toggle>
+      <Container>
+        <Row>
+          <Col xs={5}>
+            <form
+              onSubmit={(e) => locationSubmitHandler(e)}
+              id="addLocationSearchForm"
+            >
+              <input
+                className="search-field"
+                type="text"
+                name="location"
+                placeholder="Search by location"
+                autoComplete="off"
+              />
+              <button className="button" type="submit">
 
-        <Dropdown.Menu>
-          <Dropdown.Item onClick={(e) => locationSubmitHandler(e)}>
-            Location{" "}
-          </Dropdown.Item>
-          <Dropdown.Item href="#/addNameSearchForm">Name</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown> */}
-      <form
-        onSubmit={(e) => locationSubmitHandler(e)}
-        id="addLocationSearchForm"
-      >
-        <input
-          className="search-field"
-          type="text"
-          name="location"
-          placeholder="Search by location"
-          autoComplete="off"
-        />
-        <button className="search-button button-26" type="submit">
-          {" "}
-          search{" "}
-        </button>
-      </form>
-      <form onSubmit={(e) => nameSubmitHandler(e)} id="addNameSearchForm">
-        <input
-          className="search-field"
-          type="text"
-          name="name"
-          placeholder="Search by name"
-          autoComplete="off"
-        />
-        <button className="search-button button-26" type="submit">
-          {" "}
-          search{" "}
-        </button>
-      </form>
-
-      <button className="show-button button-26" onClick={() => showAll()}>
-        {" "}
-        Show All{" "}
-      </button>
-      <Col xs={7}></Col>
+                search
+              </button>
+            </form>
+          </Col>
+          <Col xs={5}>
+          <form onSubmit={(e) => nameSubmitHandler(e)} id="addNameSearchForm">
+              <input
+                className="search-field"
+                type="text"
+                name="name"
+                placeholder="Search by name"
+                autoComplete="off"
+              />
+              <button className="button" type="submit">
+                {" "}
+                search{" "}
+              </button>
+            </form>
+          </Col>
+          <Col className="showallbutton">
+            <button className="showall-button" onClick={() => showAll()}>
+              {" "}
+              Show All{" "}
+            </button>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }
