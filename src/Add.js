@@ -37,11 +37,12 @@ function Add(props) {
   };
 
   return (
-    <>
+    <div className="newtitle">
+
       {props.currentEvent ? "Update" : "Add"}
       <br />
 
-      <form onSubmit={(e) => submitHandler(e)} id="addForm">
+      <form onSubmit={(e) => submitHandler(e)} id="addForm" className="addtitles">
         Name: <br />
         <input
           type="text"
@@ -71,7 +72,7 @@ function Add(props) {
         Date:
         <br />
         <input
-          type="text"
+          type="date"
           defaultValue={props.currentEvent?.date}
           name="date"
           disabled={disabled}
@@ -83,7 +84,7 @@ function Add(props) {
           Submit{" "}
         </button>
       </form>
-    </>
+    </div>
   );
 }
 

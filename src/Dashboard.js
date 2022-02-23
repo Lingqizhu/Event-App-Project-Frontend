@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Add from "./Add";
+import SearchBar from "./searchBar";
 import "./Dashboard.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
-
-//import searchBar from "./searchBar.js"
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
 
 function Dashboard(props) {
   const [events, cEvents] = useState([]);
   const [current, cCurrent] = useState(undefined);
+  const [search, cSearch] = useState("");
   const [location, cLocation] = useState(undefined);
+  const [name, cName] = useState(undefined);
 
   const refreshList = () => {
     props.client.getEvents().then((response) => cEvents(response.data));
@@ -21,9 +24,15 @@ function Dashboard(props) {
   const removeEvent = (id) => {
     props.client.removeEve(id).then(() => refreshList());
   };
-  /* const searchBar=()=>{
-   props.client.searchLocation(location).then(()=>)
- } */
+
+  const getByLocation = (loc) => {
+    props.client.getByLocation(loc).then((response) => cEvents(response.data));
+  };
+
+  const getByName = (nam) => {
+    props.client.getByName(nam).then((response) => cEvents(response.data));
+  };
+
   //how it works?
   const updateEvent = (ad) => {
     cCurrent(ad);
@@ -36,29 +45,27 @@ function Dashboard(props) {
   const buildrows = () => {
     return events.map((current) => {
       return (
-       <>
-        <tr key={current._id}>
-           <td>{current.name}</td>
-           <td>{current.location}</td>
-           <td>{current.information}</td>
-           <td>{current.date}</td>
-           <td>
-     <button
-       className="remove"
-       onClick={() => removeEvent(current._id)}
-     >
-       {" "}
-       remove
-     </button>
-     <button className="update" onClick={() => updateEvent(current)}>
-       {" "}
-       update
-     </button>
-   </td>
-       </tr>
-
-       </>
-
+        <>
+          <tr key={current._id}>
+            <td>{current.name}</td>
+            <td>{current.location}</td>
+            <td>{current.information}</td>
+            <td>{current.date}</td>
+            <td>
+              <button
+                className="remove"
+                onClick={() => removeEvent(current._id)}
+              >
+                {" "}
+                remove
+              </button>
+              <button className="update" onClick={() => updateEvent(current)}>
+                {" "}
+                update
+              </button>
+            </td>
+          </tr>
+        </>
       );
     });
   };
@@ -66,40 +73,57 @@ function Dashboard(props) {
   return (
     <div className="dashboard">
       <div>
-        <Navbar bg="light" variant="warning">
+        <Navbar bg="white"  variant="light" className="navbar">
           <Container>
-            <Navbar.Brand href="#home">
+            <Navbar.Brand href="#home" className="navtitle">
               <img
                 alt=""
                 src="https://learning.thedeveloperacademy.com/pluginfile.php/1/theme_moove/logo/1624462331/TheDevAcademy%20Logo%20NB.png"
-                width="50"
-                height="50"
-                className="d-inline-block align-top"
+                width="60"
+                height="60"
               />{" "}
-              Events APP
-              <nav className="navbar">
-                <Button
-                  className="justify-content-end"
-                  onClick={() => props.logOut()}
-                >
-                  Logout
-                </Button>
-              </nav>
+             Events APP
             </Navbar.Brand>
+            <SearchBar
+              refreshList={() => {
+                refreshList();
+                cCurrent(undefined);
+              }}
+              cName = {cName}
+              cLocation = {cLocation}
+              getByLocation = {(loc) => getByLocation(loc)}
+              getByName = {(nam) => getByName(nam)}
+            />
+              {/* <FormControl
+                type="search"
+                placeholder="Search by location"
+                className="me-2"
+                aria-label="Search"
+              />
+              <Button variant="secondary">Search</Button> */}
+
+              <Button variant="secondary" onClick={() => props.logOut()}>Logout</Button>
           </Container>
         </Navbar>
       </div>
       <br />
-      <searchBar placeholder="search by location" />
-      {/* <button onClick={()=>props.logOut()}>Logout</button> */}
-      {/* <form >
-        <label>Search Location</label>
-        <input type="text" name="location" value={location}/>
-        <button onClick={()=>searchBar(location)}></button>
-      </form> */}
-      <Table>
+      <Add
+        client={props.client}
+        refreshList={() => {
+          refreshList();
+          cCurrent(undefined);
+        }}
+        currentEvent={current}
+        cCurrentEvent={cCurrent}
+        currentLocation={location}
+        currentName={name}
+        getByLocation={(loc) => getByLocation(loc)}
+        getByName={(nam) => getByName(nam)}
+      />
+
+      <Table className="table">
         <thead>
-          <tr >
+          <tr>
             <th>Event Name</th>
             <th>Location</th>
             <th>Information</th>
@@ -110,15 +134,6 @@ function Dashboard(props) {
         <tbody>{buildrows()}</tbody>
       </Table>
       <br />
-      <br />
-      <Add
-        client={props.client}
-        refreshList={() => {
-          refreshList();
-          cCurrent(undefined);
-        }}
-        currentEvent={current}
-      />
     </div>
   );
 }

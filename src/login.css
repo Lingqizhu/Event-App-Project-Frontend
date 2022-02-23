@@ -1,0 +1,36 @@
+.loginbackground{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    z-index:-1;
+    background-image:url(https://images.unsplash.com/photo-1641945511908-4a2ef922b2a2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDI2MXxibzhqUUtUYUUwWXx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60) ;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+.login{
+    width: 50%;
+    margin: 30px auto;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 15px 25px;
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 20;
+    text-align: center;
+    box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
+}
+input{
+
+    border-radius: 5px;
+    margin-top: 10px;
+    box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
+}
+.submit{
+    background: #BCFD4C;
+    border-radius: 8px;
+    padding: 5px;
+}
