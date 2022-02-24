@@ -13,7 +13,6 @@ import FormControl from "react-bootstrap/FormControl";
 function Dashboard(props) {
   const [events, cEvents] = useState([]);
   const [current, cCurrent] = useState(undefined);
-  const [search, cSearch] = useState("");
   const [location, cLocation] = useState(undefined);
   const [name, cName] = useState(undefined);
 
@@ -33,14 +32,9 @@ function Dashboard(props) {
     props.client.getByName(nam).then((response) => cEvents(response.data));
   };
 
-  //how it works?
-  const updateEvent = (ad) => {
-    cCurrent(ad);
-  };
+  const updateEvent = (ad) => {cCurrent(ad);};
 
-  useEffect(() => {
-    refreshList();
-  }, []);
+  useEffect(() => {refreshList()}, []);
 
   const buildrows = () => {
     return events.map((current) => {
@@ -84,15 +78,6 @@ function Dashboard(props) {
               />{" "}
              Events APP
             </Navbar.Brand>
-
-              {/* <FormControl
-                type="search"
-                placeholder="Search by location"
-                className="me-2"
-                aria-label="Search"
-              />
-              <Button variant="secondary">Search</Button> */}
-
               <Button variant="secondary" onClick={() => props.logOut()}>Logout</Button>
           </Container>
         </Navbar>

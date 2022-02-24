@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "http://localhost:3001/";
+const url = "http://localhost:3000/";
 
 export class ApiClient {
 
@@ -81,7 +81,4 @@ export class ApiClient {
   getByName(name) {
     return this.authenticatedCall("get", `${url}name/${name}`) ;
   }
-  /* searchLocation(location){
-    return this.authenticatedCall("get",`${url}location/${location}`)
-  } */
 }
