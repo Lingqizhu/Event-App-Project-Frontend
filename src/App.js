@@ -12,7 +12,7 @@ const App = () => {
     window.localStorage.setItem("token",newToken)
     changeToken(newToken);
   }
-// Navigation between
+// Navigation between pages
   const navigate= new useNavigate;
   const logOut=()=>{
     window.localStorage.removeItem("token")
