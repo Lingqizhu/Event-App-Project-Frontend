@@ -3,9 +3,9 @@ const url = "http://localhost:3000/";
 
 export class ApiClient {
 
-  constructor(token,logoutHandler){
+  constructor(token){
     this.token = token;
-    this.logoutHandler = logoutHandler;
+    /* this.logoutHandler = logoutHandler; */
   }
 
   apiCall(method, url, data) {
@@ -39,8 +39,6 @@ export class ApiClient {
   }
 
   login(username,password){
-    console.log("username",username)
-    console.log("password",password)
     return this.apiCall("post",`${url}auth`, {
       userName: username,
       password: password
@@ -67,11 +65,11 @@ export class ApiClient {
   }
 
   removeEve(id) {
-    return this.authenticatedCall("delete", `${url}${id}`);
+    return this.authenticatedCall("delete", `${url}delete/${id}`);
   }
 
   updateEve(id, name, location, information, date) {
-    return this.authenticatedCall("put", `${url}${id}`, { name, location, information, date });
+    return this.authenticatedCall("put", `${url}update/${id}`, { name, location, information, date });
   }
 
   getByLocation(location) {

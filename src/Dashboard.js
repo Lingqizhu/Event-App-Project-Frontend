@@ -7,8 +7,6 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
 
 function Dashboard(props) {
   const [events, cEvents] = useState([]);
@@ -32,9 +30,13 @@ function Dashboard(props) {
     props.client.getByName(nam).then((response) => cEvents(response.data));
   };
 
-  const updateEvent = (ad) => {cCurrent(ad);};
+  const updateEvent = (ad) => {
+    cCurrent(ad);
+  };
 
-  useEffect(() => {refreshList()}, []);
+  useEffect(() => {
+    refreshList();
+  }, []);
 
   const buildrows = () => {
     return events.map((current) => {
@@ -50,11 +52,9 @@ function Dashboard(props) {
                 className="remove"
                 onClick={() => removeEvent(current._id)}
               >
-                {" "}
                 remove
               </button>
               <button className="update" onClick={() => updateEvent(current)}>
-                {" "}
                 update
               </button>
             </td>
@@ -67,7 +67,7 @@ function Dashboard(props) {
   return (
     <div className="dashboard">
       <div>
-        <Navbar bg="white"  variant="light" className="navbar">
+        <Navbar bg="white" variant="light" className="navbar">
           <Container>
             <Navbar.Brand href="#home" className="navtitle">
               <img
@@ -76,23 +76,25 @@ function Dashboard(props) {
                 width="60"
                 height="60"
               />{" "}
-             Events APP
+              Events APP
             </Navbar.Brand>
-              <Button variant="secondary" onClick={() => props.logOut()}>Logout</Button>
+            <Button variant="secondary" onClick={() => props.logOut()}>
+              Logout
+            </Button>
           </Container>
         </Navbar>
       </div>
       <br />
       <SearchBar
-              refreshList={() => {
-                refreshList();
-                cCurrent(undefined);
-              }}
-              cName = {cName}
-              cLocation = {cLocation}
-              getByLocation = {(loc) => getByLocation(loc)}
-              getByName = {(nam) => getByName(nam)}
-            />
+        refreshList={() => {
+          refreshList();
+          cCurrent(undefined);
+        }}
+        cName={cName}
+        cLocation={cLocation}
+        getByLocation={(loc) => getByLocation(loc)}
+        getByName={(nam) => getByName(nam)}
+      />
 
       <Table className="table">
         <thead>
@@ -104,9 +106,7 @@ function Dashboard(props) {
             <th></th>
           </tr>
         </thead>
-
         <tbody>{buildrows()}</tbody>
-
       </Table>
       <br />
       <Add

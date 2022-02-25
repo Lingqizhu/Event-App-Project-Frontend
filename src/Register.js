@@ -44,7 +44,7 @@ function Register() {
         />
         <br />
         <input type="submit" className="submit" value="Register" />
-        <input type="submit" className="submit" value="login" onClick={()=>{navigate("/login")}} />
+        <input type="submit" className="submit" value="login" onClick={()=>{navigate("/")}} />
       </form>
     </div>
   );

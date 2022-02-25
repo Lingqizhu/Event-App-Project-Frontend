@@ -1,41 +1,29 @@
 import React, { useState } from "react";
 import { useNavigate} from "react-router-dom";
-import Dashboard from "./Dashboard";
-import { ApiClient } from "./apiClient";
 import "./login.css";
 
-function Login() {
-  const [token, changeToken] = useState(window.localStorage.getItem("token"));
+function Login(props) {
   const [disabled, cDisabled] = useState(false);
+  const navigate = useNavigate();
   /* const [userName, setUserName] = useState("");
   const [password, setPassword] = useState(""); */
-
-  const client = new ApiClient(token);
-  const navigate = useNavigate();
-
-  const loggedIn = (newToken) => {
-    window.localStorage.setItem("token", newToken);
-    changeToken(newToken);
-  };
-  const logOut = () => {
-    window.localStorage.removeItem("token",logOut)
-    changeToken("")
-  }
 
   const submitHandler = (e) => {
     e.preventDefault();
     cDisabled(true);
-    client
+    props.client
       .login(e.target.username.value,e.target.password.value)
       .then( (response) => {
         cDisabled(false);
-        loggedIn(response.data.token);
+        props.loggedIn(response.data.token);
+        navigate("/Dashboard")
       })
       .catch( (err) => {
         alert("an error has occurred");
         console.log(err);
         cDisabled(false);
       })
+
   };
   /* const submitHandler = (e) => {
     console.log("submit");
@@ -53,9 +41,6 @@ function Login() {
 
   return (
     <div>
-      {token ? (
-        <Dashboard client={client} logout={() => logOut()} />
-      ) : (
         <div className="loginbackground">
         <form className="login" onSubmit={(e) => submitHandler(e)}>
           <h2>Event App</h2>
@@ -87,8 +72,6 @@ function Login() {
           </button>
         </form>
       </div>
-      )}
-
     </div>
   );
 }
