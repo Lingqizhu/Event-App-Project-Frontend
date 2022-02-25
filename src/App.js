@@ -17,7 +17,7 @@ const App = () => {
   const logOut=()=>{
     window.localStorage.removeItem("token")
     changeToken("");
-    navigate("/login")
+    navigate("/")
   }
 
   const client = new ApiClient(token);
@@ -26,7 +26,6 @@ const App = () => {
 
         <Routes>
           <Route path="/" element={<Login client={client} loggedIn={loggedIn}/>} />
-          <Route path="/login" element={<Login client={client} loggedIn={loggedIn}/>} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Dashboard" element={<Dashboard client={client} logOut={()=>logOut()}/>} />
         </Routes>
