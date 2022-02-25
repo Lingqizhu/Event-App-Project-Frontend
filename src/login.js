@@ -17,11 +17,10 @@ function Login(props) {
         navigate("/Dashboard")
       })
       .catch( (err) => {
-        alert("Username does not exist, please register");
+        alert("Username does not exist or password is not right");
         console.log(err);
         cDisabled(false);
       })
-
   };
 
   return (
@@ -31,10 +30,8 @@ function Login(props) {
           <h2>Event App</h2>
           <h4>Login</h4>
           <input type="text" name="username" placeholder="username" id="loginput" disabled={disabled} />
-
           <br />
           <input type="password" name="password" placeholder="password" id="loginput" disabled={disabled} />
-
           <br />
           <br />
           <button type="submit" className="submit" disabled={disabled}>

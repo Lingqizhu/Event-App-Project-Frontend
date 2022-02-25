@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from "react";
-import { BrowserRouter, Routes, Route, useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import { Routes, Route, useNavigate} from "react-router-dom";
 import {ApiClient} from "./apiClient";
 import Login from "./login";
 import Register from "./Register";
@@ -17,13 +17,10 @@ const App = () => {
   const logOut=()=>{
     window.localStorage.removeItem("token")
     changeToken("");
-
     navigate("/login")
   }
 
-
   const client = new ApiClient(token);
-
   return (
     <div>
 
