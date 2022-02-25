@@ -19,7 +19,7 @@ function Login(props) {
         navigate("/Dashboard")
       })
       .catch( (err) => {
-        alert("an error has occurred");
+        alert("Username does not exist, please register");
         console.log(err);
         cDisabled(false);
       })

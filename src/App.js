@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate} from "react-router-dom";
 import {ApiClient} from "./apiClient";
 import Login from "./login";
 import Register from "./Register";
@@ -13,9 +13,12 @@ const App = () => {
     changeToken(newToken);
   }
 
+
   const logOut=()=>{
     window.localStorage.removeItem("token")
     changeToken();
+    const navigate= new useNavigate;
+    navigate("/Register")
   }
 
   const client = new ApiClient(token);
